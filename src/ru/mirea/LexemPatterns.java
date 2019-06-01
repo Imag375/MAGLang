@@ -65,7 +65,7 @@ public class LexemPatterns {
 
     private boolean isNumber(String lexeme) {
         for(char ch : lexeme.toCharArray()) {
-            if(NUMBERS.indexOf(ch) == -1) {
+            if(!NUMBERS.contains(String.valueOf(ch))) {
                 return false;
             }
         }
@@ -74,7 +74,7 @@ public class LexemPatterns {
 
     private boolean isVariable(String lexeme) {
         for(char ch : lexeme.toCharArray()) {
-            if(VARIABLE.indexOf(ch) == -1) {
+            if (!VARIABLE.contains(String.valueOf(ch))) {
                 return false;
             }
         }

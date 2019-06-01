@@ -4,7 +4,7 @@ public class Token {
     private String typeLexeme;
     private String lexeme;
 
-    public void setToken(String typeLexeme, String lexeme) {
+    public Token(String typeLexeme, String lexeme) {
         this.typeLexeme = typeLexeme;
         this.lexeme = lexeme;
     }
