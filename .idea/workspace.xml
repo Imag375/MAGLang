@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8047a61-a9ee-4e24-bc34-52bbf85ef137" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/code.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ru/mirea/Variable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/LexemPatterns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/LexemPatterns.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/Parser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/mirea/Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/mirea/Lexer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/mirea/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/mirea/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/mirea/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/mirea/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/mirea/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/mirea/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ru/mirea/StackMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/mirea/StackMachine.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,24 +27,35 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/mirea/Lexer.java">
+        <entry file="file://$PROJECT_DIR$/src/ru/mirea/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="120">
+              <caret line="344" column="67" selection-start-line="344" selection-start-column="67" selection-end-line="344" selection-end-column="67" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#222#223#0" expanded="true" />
-                <element signature="e#256#257#0" expanded="true" />
+                <element signature="e#606#607#0" expanded="true" />
+                <element signature="e#641#642#0" expanded="true" />
+                <element signature="e#685#686#0" expanded="true" />
+                <element signature="e#713#714#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/mirea/Parser.java">
+        <entry file="file://$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+            <state relative-caret-position="85">
+              <caret line="5" column="65" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ru/mirea/Variable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
             </state>
           </provider>
         </entry>
@@ -56,17 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/mirea/StackMachine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1246">
-              <caret line="76" column="25" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
+            <state relative-caret-position="72">
+              <caret line="231" column="60" lean-forward="true" selection-start-line="231" selection-start-column="60" selection-end-line="231" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -74,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ru/mirea/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="264">
+              <caret line="22" column="13" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="22" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -87,7 +94,7 @@
         <entry file="file://$PROJECT_DIR$/code.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -107,11 +114,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ru/mirea/Main.java" />
         <option value="$PROJECT_DIR$/src/ru/mirea/Token.java" />
+        <option value="$PROJECT_DIR$/src/ru/mirea/Variable.java" />
+        <option value="$PROJECT_DIR$/src/ru/mirea/Lexer.java" />
         <option value="$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java" />
         <option value="$PROJECT_DIR$/code.txt" />
-        <option value="$PROJECT_DIR$/src/ru/mirea/Lexer.java" />
+        <option value="$PROJECT_DIR$/src/ru/mirea/Main.java" />
+        <option value="$PROJECT_DIR$/src/ru/mirea/Parser.java" />
+        <option value="$PROJECT_DIR$/src/ru/mirea/StackMachine.java" />
       </list>
     </option>
   </component>
@@ -206,28 +216,37 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25340393" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17473525" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.3289689" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.45335516" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.53846157" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39934534" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -238,28 +257,83 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Parser.java</url>
+          <line>552</line>
+          <properties />
+          <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Parser.java</url>
+          <line>553</line>
+          <properties />
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Parser.java</url>
+          <line>554</line>
+          <properties />
+          <option name="timeStamp" value="110" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Parser.java</url>
+          <line>555</line>
+          <properties />
+          <option name="timeStamp" value="111" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Parser.java</url>
+          <line>557</line>
+          <properties />
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Parser.java</url>
+          <line>556</line>
+          <properties />
+          <option name="timeStamp" value="113" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Parser.java</url>
+          <line>560</line>
+          <properties />
+          <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Parser.java</url>
+          <line>562</line>
+          <properties />
+          <option name="timeStamp" value="115" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Parser.java</url>
+          <line>564</line>
+          <properties />
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Parser.java</url>
+          <line>563</line>
+          <properties />
+          <option name="timeStamp" value="117" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Parser.java</url>
+          <line>568</line>
+          <properties />
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/StackMachine.java">
+    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Variable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
@@ -270,29 +344,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java">
+    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Lexer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1246">
-          <caret line="76" column="25" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
+        <state relative-caret-position="53">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Lexer.java">
+    <entry file="file://$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="85">
+          <caret line="5" column="65" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="22" column="13" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="22" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#222#223#0" expanded="true" />
-            <element signature="e#256#257#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="344" column="67" selection-start-line="344" selection-start-column="67" selection-end-line="344" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#606#607#0" expanded="true" />
+            <element signature="e#641#642#0" expanded="true" />
+            <element signature="e#685#686#0" expanded="true" />
+            <element signature="e#713#714#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ru/mirea/StackMachine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="231" column="60" lean-forward="true" selection-start-line="231" selection-start-column="60" selection-end-line="231" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>

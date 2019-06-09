@@ -16,25 +16,24 @@ public class Lexer {
         LexemPatterns lp = new LexemPatterns();
         String buffer = "";
         int count = 0;
-        for(String line : lines) {
+        for (String line : lines) {
             count++;
             line = line.replace("\uFEFF", "");
             line = line.replace(" ", "");
-            while(line.length() != 0) {
-                if(!lp.getTerminal(line).equals("ERROR")) {
+            while (line.length() != 0) {
+                if (!lp.getTerminal(line).equals("ERROR")) {
                     this.tokens.add(new Token(lp.getTerminal(line), line));
                     line = line.replace(line, buffer);
                     buffer = buffer.replace(buffer, "");
-                }
-                else {
-                    if(line.length() == 1){
+                } else {
+                    if (line.length() == 1) {
                         System.out.println("Обнаружена ошибка в коде программы! Недопустимый символ!");
                         tokens.clear();
                         tokens.add(new Token("ERROR", String.valueOf(count)));
                         return tokens;
                     }
-                    buffer = line.charAt(line.length()-1) + buffer;
-                    line = line.replace(line, line.substring(0, line.length()-1));
+                    buffer = line.charAt(line.length() - 1) + buffer;
+                    line = line.replace(line, line.substring(0, line.length() - 1));
                 }
 
             }
