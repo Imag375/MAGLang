@@ -8,7 +8,9 @@ public class LexemPatterns {
     public String getTerminal(String lexeme) {
         if (lexeme.contains("int") || lexeme.contains("while") || lexeme.contains("do") || lexeme.contains("if")
                 || lexeme.contains("else") || lexeme.contains("for") || lexeme.contains("not") || lexeme.contains("and")
-                || lexeme.contains("or") || lexeme.contains("xor")) {
+                || lexeme.contains("or") || lexeme.contains("List") || lexeme.contains("HashSet") || lexeme.contains("create")
+                || lexeme.contains("add") || lexeme.contains("size") || lexeme.contains("get") || lexeme.contains("remove")
+                || lexeme.contains("print")) {
             if (lexeme.equals("int")) {
                 return "INT_KW";
             }
@@ -29,6 +31,27 @@ public class LexemPatterns {
             }
             if (lexeme.equals("not")) {
                 return "NOT_KW";
+            }
+            if (lexeme.equals("print")) {
+                return "PRINT_KW";
+            }
+            if (lexeme.equals("List")) {
+                return "LIST_KW";
+            }
+            if (lexeme.equals("HashSet")) {
+                return "HASH_SET_KW";
+            }
+            if (lexeme.equals("create")) {
+                return "CREATE_KW";
+            }
+            if (lexeme.equals("size")) {
+                return "SIZE_KW";
+            }
+            if (lexeme.equals("get")) {
+                return "GET_KW";
+            }
+            if (lexeme.equals("add") || lexeme.equals("remove")) {
+                return "FUNCTION";
             }
             if (lexeme.equals("and") || lexeme.equals("or")) {
                 return "BOOL_OP";
@@ -58,6 +81,9 @@ public class LexemPatterns {
         }
         if (lexeme.equals(":")) {
             return "COLON";
+        }
+        if (lexeme.equals(".")) {
+            return "POINT";
         }
         if (lexeme.equals("=")) {
             return "ASSIGN_OP";

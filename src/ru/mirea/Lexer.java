@@ -27,7 +27,7 @@ public class Lexer {
                     buffer = buffer.replace(buffer, "");
                 } else {
                     if (line.length() == 1) {
-                        System.out.println("Обнаружена ошибка в коде программы! Недопустимый символ!");
+                        System.out.println("Lexer:\nОбнаружена ошибка в коде программы! Недопустимый символ!");
                         tokens.clear();
                         tokens.add(new Token("ERROR", String.valueOf(count)));
                         return tokens;

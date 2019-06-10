@@ -7,8 +7,10 @@ public class StackMachine {
     private final String VARIABLE = "qwertyuiopasdfghjklzxcvbnm";
 
     private LinkedList<Variable> varTable = new LinkedList<>();
-    private LinkedList<Variable> transitTable = new LinkedList<>();
-    private LinkedList<String> poliz = new LinkedList<>();
+    private LinkedList<NameHashSet> nameHashSetTable = new LinkedList<>();
+    private LinkedList<NameList> nameListTable = new LinkedList<>();
+    private LinkedList<Variable> transitTable;
+    private LinkedList<String> poliz;
     private LinkedList<String> stack = new LinkedList();
 
     private int pointer;
@@ -23,187 +25,196 @@ public class StackMachine {
         while (poliz.size() > pointer) {
             switch (poliz.get(pointer)) {
                 case "~": {
-                    varTable.add(new Variable(stack.getLast(), 0));
+                    if (!(stack.getFirst().contains("L") || stack.getFirst().contains("HS"))) {
+                        varTable.add(new Variable(stack.getFirst(), 0));
+                    } else {
+                        if (stack.getFirst().contains("L")) {
+                            nameListTable.add(new NameList(stack.getFirst()));
+                        } else {
+                            nameHashSetTable.add(new NameHashSet(stack.getFirst()));
+                        }
+                        stack.removeFirst();
+                    }
                     pointer++;
                     break;
                 }
                 case "=": {
                     float num = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     for (Variable var : varTable) {
-                        if (var.name.equals(stack.getLast())) {
+                        if (var.name.equals(stack.getFirst())) {
                             var.value = num;
                         }
                     }
-                    stack.removeLast();
+                    stack.removeFirst();
                     pointer++;
                     break;
                 }
                 case "+": {
                     float num2 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     float num1 = getNum();
-                    stack.removeLast();
-                    stack.addLast((num1 + num2) + "");
+                    stack.removeFirst();
+                    stack.addFirst((num1 + num2) + "");
                     pointer++;
                     break;
                 }
                 case "-": {
                     float num2 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     float num1 = getNum();
-                    stack.removeLast();
-                    stack.addLast((num1 - num2) + "");
+                    stack.removeFirst();
+                    stack.addFirst((num1 - num2) + "");
                     pointer++;
                     break;
                 }
                 case "*": {
                     float num2 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     float num1 = getNum();
-                    stack.removeLast();
-                    stack.addLast((num1 * num2) + "");
+                    stack.removeFirst();
+                    stack.addFirst((num1 * num2) + "");
                     pointer++;
                     break;
                 }
                 case "/": {
                     float num2 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     float num1 = getNum();
-                    stack.removeLast();
-                    stack.addLast((num1 / num2) + "");
+                    stack.removeFirst();
+                    stack.addFirst((num1 / num2) + "");
                     pointer++;
                     break;
                 }
                 case "==": {
                     float num2 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     float num1 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     if (num1 == num2) {
-                        stack.addLast("true");
+                        stack.addFirst("true");
                     } else {
-                        stack.addLast("false");
+                        stack.addFirst("false");
                     }
                     pointer++;
                     break;
                 }
                 case "!=": {
                     float num2 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     float num1 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     if (num1 != num2) {
-                        stack.addLast("true");
+                        stack.addFirst("true");
                     } else {
-                        stack.addLast("false");
+                        stack.addFirst("false");
                     }
                     pointer++;
                     break;
                 }
                 case ">=": {
                     float num2 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     float num1 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     if (num1 >= num2) {
-                        stack.addLast("true");
+                        stack.addFirst("true");
                     } else {
-                        stack.addLast("false");
+                        stack.addFirst("false");
                     }
                     pointer++;
                     break;
                 }
                 case "<=": {
                     float num2 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     float num1 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     if (num1 <= num2) {
-                        stack.addLast("true");
+                        stack.addFirst("true");
                     } else {
-                        stack.addLast("false");
+                        stack.addFirst("false");
                     }
                     pointer++;
                     break;
                 }
                 case ">": {
                     float num2 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     float num1 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     if (num1 > num2) {
-                        stack.addLast("true");
+                        stack.addFirst("true");
                     } else {
-                        stack.addLast("false");
+                        stack.addFirst("false");
                     }
                     pointer++;
                     break;
                 }
                 case "<": {
                     float num2 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     float num1 = getNum();
-                    stack.removeLast();
+                    stack.removeFirst();
                     if (num1 < num2) {
-                        stack.addLast("true");
+                        stack.addFirst("true");
                     } else {
-                        stack.addLast("false");
+                        stack.addFirst("false");
                     }
                     pointer++;
                     break;
                 }
                 case "and": {
                     boolean a, b;
-                    if (stack.removeLast().equals("true")) {
+                    if (stack.removeFirst().equals("true")) {
                         b = true;
                     } else {
                         b = false;
                     }
-                    if (stack.removeLast().equals("true")) {
+                    if (stack.removeFirst().equals("true")) {
                         a = true;
                     } else {
                         a = false;
                     }
                     if (a && b) {
-                        stack.addLast("true");
+                        stack.addFirst("true");
                     } else {
-                        stack.addLast("false");
+                        stack.addFirst("false");
                     }
                     pointer++;
                     break;
                 }
                 case "or": {
                     boolean a, b;
-                    if (stack.removeLast().equals("true")) {
+                    if (stack.removeFirst().equals("true")) {
                         b = true;
                     } else {
                         b = false;
                     }
-                    if (stack.removeLast().equals("true")) {
+                    if (stack.removeFirst().equals("true")) {
                         a = true;
                     } else {
                         a = false;
                     }
                     if (a || b) {
-                        stack.addLast("true");
+                        stack.addFirst("true");
                     } else {
-                        stack.addLast("false");
+                        stack.addFirst("false");
                     }
                     pointer++;
                     break;
                 }
                 case "not": {
                     boolean a, b;
-                    if (stack.removeLast().equals("true")) {
+                    if (stack.removeFirst().equals("true")) {
                         a = true;
                     } else {
                         a = false;
                     }
                     if (!a) {
-                        stack.addLast("true");
+                        stack.addFirst("true");
                     } else {
-                        stack.addLast("false");
+                        stack.addFirst("false");
                     }
                     pointer++;
                     break;
@@ -211,25 +222,25 @@ public class StackMachine {
                 case "!": {
                     int num = pointer;
                     for (Variable var : transitTable) {
-                        if (var.name.equals(stack.getLast())) {
+                        if (var.name.equals(stack.getFirst())) {
                             num = (int) var.value;
                         }
                     }
-                    stack.removeLast();
+                    stack.removeFirst();
                     pointer = num;
                     break;
                 }
                 case "!F": {
                     int num = pointer;
                     for (Variable var : transitTable) {
-                        if (var.name.equals(stack.getLast())) {
+                        if (var.name.equals(stack.getFirst())) {
                             num = (int) var.value;
                             break;
                         }
                     }
-                    stack.removeLast();
+                    stack.removeFirst();
                     boolean a;
-                    if (stack.removeLast().equals("true")) {
+                    if (stack.removeFirst().equals("true")) {
                         a = true;
                     } else {
                         a = false;
@@ -240,40 +251,171 @@ public class StackMachine {
                     break;
                 }
                 case "print": {
+                    System.out.println("\nТаблица переменных:");
+                    if (varTable.size() > 0) {
+                        for (Variable str : varTable) {
+                            System.out.println(str.name + " : " + str.value);
+                        }
+                    }
+                    System.out.println("Таблица LinkedList:");
+                    if (nameListTable.size() > 0) {
+                        for (NameList str : nameListTable) {
+                            System.out.println(str.name + " : " + str.list);
+                        }
+                    }
+                    System.out.println("Таблица HashSet:");
+                    if (nameHashSetTable.size() > 0) {
+                        for (NameHashSet str : nameHashSetTable) {
+                            System.out.println(str.name + " : " + str.set);
+                        }
+                    }
                     pointer++;
                     break;
                 }
-                case ".": {
+                case "add": {
+                    int num = (int) getNum();
+                    stack.removeFirst();
+                    if (stack.getFirst().contains("L")) {
+                        for (NameList var : nameListTable) {
+                            if (var.name.equals(stack.getFirst())) {
+                                var.list.add(num);
+                                break;
+                            }
+                        }
+                    } else {
+                        if (stack.getFirst().contains("HS")) {
+                            for (NameHashSet var : nameHashSetTable) {
+                                if (var.name.equals(stack.getFirst())) {
+                                    var.set.add(num);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    stack.removeFirst();
+                    pointer++;
+                    break;
+                }
+                case "get": {
+                    int num = (int) getNum();
+                    stack.removeFirst();
+                    if (stack.getFirst().contains("L")) {
+                        for (NameList var : nameListTable) {
+                            if (var.name.equals(stack.getFirst())) {
+                                if (num < var.list.size()) {
+                                    stack.removeFirst();
+                                    stack.addFirst(var.list.get(num) + "");
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    pointer++;
+                    break;
+                }
+                case "size": {
+                    if (stack.getFirst().contains("L")) {
+                        for (NameList var : nameListTable) {
+                            if (var.name.equals(stack.getFirst())) {
+                                stack.removeFirst();
+                                stack.addFirst(var.list.size() + "");
+                                break;
+                            }
+                        }
+                    } else {
+                        if (stack.getFirst().contains("HS")) {
+                            for (NameHashSet var : nameHashSetTable) {
+                                if (var.name.equals(stack.getFirst())) {
+                                    stack.removeFirst();
+                                    stack.addFirst(var.set.size() + "");
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    pointer++;
+                    break;
+                }
+                case "remove": {
+                    int num = (int) getNum();
+                    stack.removeFirst();
+                    if (stack.getFirst().contains("L")) {
+                        for (NameList var : nameListTable) {
+                            if (var.name.equals(stack.getFirst())) {
+                                if (var.list.contains(num)) {
+                                    var.list.remove(var.list.lastIndexOf(num));
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    if (stack.getFirst().contains("HS")) {
+                        for (NameHashSet var : nameHashSetTable) {
+                            if (var.name.equals(stack.getFirst())) {
+                                if (var.set.contains(num)) {
+                                    var.set.remove(num);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    stack.removeFirst();
+                    pointer++;
+                    break;
+                }
+                case "|": { //конец области видимости, удаляем переменные, которые ей принадлежат
+                    int level = (int) getNum();
+                    stack.removeFirst();
+                    if (varTable.size() > 0) {
+                        do {
+                            if (varTable.getLast().name.contains("" + level)) {
+                                varTable.removeLast();
+                            } else break;
+                            if (varTable.size() == 0) {
+                                break;
+                            }
+                        } while (true);
+                    }
+                    if (nameListTable.size() > 0) {
+                        do {
+                            if (nameListTable.getLast().name.contains("" + level)) {
+                                nameListTable.removeLast();
+                            } else break;
+                            if (nameListTable.size() == 0) {
+                                break;
+                            }
+                        } while (true);
+                    }
+                    if (nameHashSetTable.size() > 0) {
+                        do {
+                            if (nameHashSetTable.getLast().name.contains("" + level)) {
+                                nameHashSetTable.removeLast();
+                            } else break;
+                            if (nameHashSetTable.size() == 0) {
+                                break;
+                            }
+                        } while (true);
+                    }
                     pointer++;
                     break;
                 }
                 default: {
-                    stack.addLast(poliz.get(pointer));
+                    stack.addFirst(poliz.get(pointer));
                     pointer++;
-                }
-            }
-            if (varTable.size() > 0) {
-                for (Variable str : varTable) {
-                    System.out.println(str.name + " : " + str.value);
-                }
-            }
-            if (stack.size() > 0) {
-                for (String str : stack) {
-                    System.out.println(str);
                 }
             }
         }
     }
 
     private float getNum() {
-        if (VARIABLE.contains(stack.getLast().substring(0, 1))) {
+        if (VARIABLE.contains(stack.getFirst().substring(0, 1))) {
             for (Variable var : varTable) {
-                if (var.name.equals(stack.getLast())) {
+                if (var.name.equals(stack.getFirst())) {
                     return var.value;
                 }
             }
         } else {
-            return Float.parseFloat(stack.getLast());
+            return Float.parseFloat(stack.getFirst());
         }
         return -1;
     }

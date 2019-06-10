@@ -13,16 +13,10 @@ public class Main {
             List<String> lines = Files.readAllLines(Paths.get("C:\\Users\\Анастасия\\OneDrive\\6 семестр\\Системное ПО\\MAGLang\\code.txt"), StandardCharsets.UTF_8);
             Lexer lexer = new Lexer(lines);
             Parser parser = new Parser(lexer.getTokens());
-            parser.lang();
-            for(String str : parser.getPoliz()) {
-                System.out.print(str + " ");
+            if (parser.lang() == 0) {
+                StackMachine stackMachine = new StackMachine(parser.getPoliz(), parser.getTransitTable());
+                stackMachine.SM();
             }
-            System.out.println("\n");
-            for(Variable str : parser.getTransitTable()) {
-                System.out.println(str.name + " : " + str.value);
-            }
-            StackMachine stackMachine = new StackMachine(parser.getPoliz(), parser.getTransitTable());
-            stackMachine.SM();
         } catch (IOException e) {
             System.out.println("Не могу прочесть файл :(");
         }
