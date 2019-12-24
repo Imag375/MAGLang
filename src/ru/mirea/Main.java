@@ -10,11 +10,13 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            List<String> lines = Files.readAllLines(Paths.get("C:\\Users\\Анастасия\\OneDrive\\6 семестр\\Системное ПО\\MAGLang\\code.txt"), StandardCharsets.UTF_8);
+            List<String> lines = Files.readAllLines(Paths.get("code.txt"), StandardCharsets.UTF_8);
             Lexer lexer = new Lexer(lines);
             Parser parser = new Parser(lexer.getTokens());
             if (parser.lang() == 0) {
-                StackMachine stackMachine = new StackMachine(parser.getPoliz(), parser.getTransitTable());
+                Optimizer optimizer = new Optimizer(parser.getPoliz(), parser.getTransitTable());
+                optimizer.optimize();
+                StackMachine stackMachine = new StackMachine(optimizer.getPoliz(), parser.getTransitTable());
                 stackMachine.SM();
             }
         } catch (IOException e) {

@@ -1,21 +1,23 @@
 package ru.mirea;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public class StackMachine {
-
-    private final String VARIABLE = "qwertyuiopasdfghjklzxcvbnm";
+    private final HashSet<String> VARIABLE = new HashSet<>(Arrays.asList("q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","z","x","c","v","b","n","m"));
 
     private LinkedList<Variable> varTable = new LinkedList<>();
     private LinkedList<NameHashSet> nameHashSetTable = new LinkedList<>();
     private LinkedList<NameList> nameListTable = new LinkedList<>();
-    private LinkedList<Variable> transitTable;
+    private HashMap<String, Integer> transitTable;
     private LinkedList<String> poliz;
     private LinkedList<String> stack = new LinkedList();
 
     private int pointer;
 
-    public StackMachine(LinkedList<String> poliz, LinkedList<Variable> transitTable) {
+    public StackMachine(LinkedList<String> poliz, HashMap<String, Integer> transitTable) {
         this.poliz = poliz;
         this.transitTable = transitTable;
         pointer = 0;
@@ -24,7 +26,7 @@ public class StackMachine {
     public void SM() {
         while (poliz.size() > pointer) {
             switch (poliz.get(pointer)) {
-                case "~": {
+                case "~": { // оператор создания новой переменной
                     if (!(stack.getFirst().contains("L") || stack.getFirst().contains("HS"))) {
                         varTable.add(new Variable(stack.getFirst(), 0));
                     } else {
@@ -38,11 +40,11 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "=": {
+                case "=": { // оператор присваивания
                     float num = getNum();
                     stack.removeFirst();
                     for (Variable var : varTable) {
-                        if (var.name.equals(stack.getFirst())) {
+                        if (stack.getFirst().equals(var.name)) {
                             var.value = num;
                         }
                     }
@@ -50,7 +52,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "+": {
+                case "+": { // оператор арифметического сложения
                     float num2 = getNum();
                     stack.removeFirst();
                     float num1 = getNum();
@@ -59,7 +61,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "-": {
+                case "-": { // оператор арифметического вычитания
                     float num2 = getNum();
                     stack.removeFirst();
                     float num1 = getNum();
@@ -68,7 +70,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "*": {
+                case "*": { // оператор арифметического умножения
                     float num2 = getNum();
                     stack.removeFirst();
                     float num1 = getNum();
@@ -77,7 +79,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "/": {
+                case "/": { // оператор арифметического деления
                     float num2 = getNum();
                     stack.removeFirst();
                     float num1 = getNum();
@@ -86,7 +88,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "==": {
+                case "==": {    // равенство
                     float num2 = getNum();
                     stack.removeFirst();
                     float num1 = getNum();
@@ -99,7 +101,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "!=": {
+                case "!=": {    //неравенство
                     float num2 = getNum();
                     stack.removeFirst();
                     float num1 = getNum();
@@ -112,7 +114,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case ">=": {
+                case ">=": {    //больше или равно
                     float num2 = getNum();
                     stack.removeFirst();
                     float num1 = getNum();
@@ -125,7 +127,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "<=": {
+                case "<=": {    // меньше или равно
                     float num2 = getNum();
                     stack.removeFirst();
                     float num1 = getNum();
@@ -138,7 +140,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case ">": {
+                case ">": { //больше
                     float num2 = getNum();
                     stack.removeFirst();
                     float num1 = getNum();
@@ -151,7 +153,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "<": {
+                case "<": { //меньше
                     float num2 = getNum();
                     stack.removeFirst();
                     float num1 = getNum();
@@ -164,18 +166,10 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "and": {
+                case "and": {   //конъюнкция (логическое умножение)
                     boolean a, b;
-                    if (stack.removeFirst().equals("true")) {
-                        b = true;
-                    } else {
-                        b = false;
-                    }
-                    if (stack.removeFirst().equals("true")) {
-                        a = true;
-                    } else {
-                        a = false;
-                    }
+                    b = stack.removeFirst().equals("true");
+                    a = stack.removeFirst().equals("true");
                     if (a && b) {
                         stack.addFirst("true");
                     } else {
@@ -184,18 +178,10 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "or": {
+                case "or": {    //дизъюнкция (оператор логического сложения)
                     boolean a, b;
-                    if (stack.removeFirst().equals("true")) {
-                        b = true;
-                    } else {
-                        b = false;
-                    }
-                    if (stack.removeFirst().equals("true")) {
-                        a = true;
-                    } else {
-                        a = false;
-                    }
+                    b = stack.removeFirst().equals("true");
+                    a = stack.removeFirst().equals("true");
                     if (a || b) {
                         stack.addFirst("true");
                     } else {
@@ -204,13 +190,9 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "not": {
-                    boolean a, b;
-                    if (stack.removeFirst().equals("true")) {
-                        a = true;
-                    } else {
-                        a = false;
-                    }
+                case "not": {   // инверсия (логическое НЕ)
+                    boolean a;
+                    a = stack.removeFirst().equals("true");
                     if (!a) {
                         stack.addFirst("true");
                     } else {
@@ -219,38 +201,19 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "!": {
-                    int num = pointer;
-                    for (Variable var : transitTable) {
-                        if (var.name.equals(stack.getFirst())) {
-                            num = (int) var.value;
-                        }
-                    }
-                    stack.removeFirst();
-                    pointer = num;
+                case "!": { //оператор безусловного перехода
+                    pointer = transitTable.get(stack.removeFirst());
                     break;
                 }
-                case "!F": {
-                    int num = pointer;
-                    for (Variable var : transitTable) {
-                        if (var.name.equals(stack.getFirst())) {
-                            num = (int) var.value;
-                            break;
-                        }
-                    }
-                    stack.removeFirst();
-                    boolean a;
-                    if (stack.removeFirst().equals("true")) {
-                        a = true;
-                    } else {
-                        a = false;
-                    }
+                case "!F": {    //оператор условного перехода
+                    int num = transitTable.get(stack.removeFirst());
+                    boolean a = stack.removeFirst().equals("true");
                     if (!a) {
                         pointer = num;
                     } else pointer++;
                     break;
                 }
-                case "print": {
+                case "print": { //вызов функции для вывода на экран таблицы переменных
                     System.out.println("\nТаблица переменных:");
                     if (varTable.size() > 0) {
                         for (Variable str : varTable) {
@@ -272,7 +235,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "add": {
+                case "add": {   //вызов метода для добавления нового элемента в список
                     int num = (int) getNum();
                     stack.removeFirst();
                     if (stack.getFirst().contains("L")) {
@@ -296,7 +259,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "get": {
+                case "get": {   //вызов метода для получения элемента из списка
                     int num = (int) getNum();
                     stack.removeFirst();
                     if (stack.getFirst().contains("L")) {
@@ -313,7 +276,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "size": {
+                case "size": {  //вызов метода для выяснения размера списка или HashSet
                     if (stack.getFirst().contains("L")) {
                         for (NameList var : nameListTable) {
                             if (var.name.equals(stack.getFirst())) {
@@ -336,7 +299,7 @@ public class StackMachine {
                     pointer++;
                     break;
                 }
-                case "remove": {
+                case "remove": {    //вызов метода для удаления элемента
                     int num = (int) getNum();
                     stack.removeFirst();
                     if (stack.getFirst().contains("L")) {
@@ -352,9 +315,7 @@ public class StackMachine {
                     if (stack.getFirst().contains("HS")) {
                         for (NameHashSet var : nameHashSetTable) {
                             if (var.name.equals(stack.getFirst())) {
-                                if (var.set.contains(num)) {
-                                    var.set.remove(num);
-                                }
+                                var.set.remove(num);
                                 break;
                             }
                         }

@@ -1,7 +1,9 @@
 package ru.mirea;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Parser {
 
@@ -9,7 +11,7 @@ public class Parser {
     private LinkedList<Variable> varTable = new LinkedList<>();
     private LinkedList<NameHashSet> nameHashSetTable = new LinkedList<>();
     private LinkedList<NameList> nameListTable = new LinkedList<>();
-    private LinkedList<Variable> transitTable = new LinkedList<>();
+    private HashMap<String, Integer> transitTable = new HashMap<>();
     private LinkedList<String> poliz = new LinkedList<>();
     private LinkedList<Token> stack = new LinkedList<>();
 
@@ -23,7 +25,7 @@ public class Parser {
         this.tokens = tokens;
     }
 
-    public LinkedList<Variable> getTransitTable() {
+    public HashMap<String, Integer> getTransitTable() {
         return transitTable;
     }
 
@@ -43,18 +45,16 @@ public class Parser {
         }
         if (flagErr > 0) {
             System.out.println("Обнаружена ошибка в синтаксисе кода!");
-        } else {
-            if (flagErr == 0) {
-                System.out.println("Lexer: Ok");
-                System.out.println("Parser: Ok");
-                System.out.println("\nОбратная польская запись:");
-                for(String str : poliz) {
-                    System.out.print(str + " ");
-                }
-                System.out.println("\nТаблица значений переходов:");
-                for(Variable str : transitTable) {
-                    System.out.println(str.name + " : " + str.value);
-                }
+        } else if (flagErr == 0) {
+            System.out.println("Lexer: Ok");
+            System.out.println("Parser: Ok");
+            System.out.println("\nОбратная польская запись:");
+            for (String str : poliz) {
+                System.out.print(str + " ");
+            }
+            System.out.println("\nТаблица значений переходов:");
+            for (Map.Entry entry : transitTable.entrySet()) {
+                System.out.println(entry);
             }
         }
         varTable.clear();
@@ -245,18 +245,14 @@ public class Parser {
                         L_RB();
                         stmt();
                         R_RB();
-                    } else {
-                        if (tokens.get(pointer).getTypeLexeme().equals("SIZE_KW")) {
-                            SIZE_KW();
-                        }
+                    } else if (tokens.get(pointer).getTypeLexeme().equals("SIZE_KW")) {
+                        SIZE_KW();
                     }
                 }
+            } else if (tokens.get(pointer).getTypeLexeme().equals("NUMBER")) {
+                NUMBER();
             } else {
-                if (tokens.get(pointer).getTypeLexeme().equals("NUMBER")) {
-                    NUMBER();
-                } else {
-                    b_stmt();
-                }
+                b_stmt();
             }
         }
     }
@@ -288,6 +284,7 @@ public class Parser {
                         for (Variable var : varTable) {
                             if (var.name.equals(tokens.get(pointer).getLexeme() + (level - i))) {
                                 flag = true;
+                                break;
                             }
                         }
                         i++;
@@ -316,19 +313,36 @@ public class Parser {
                             }
                         }
                         poliz.add(tokens.get(pointer).getLexeme() + lvl);
-                    } else {    //если не нашли существующую переменную, тогда может вызывается какая-то функция?
-                        if (pointer + 1 < tokens.size() && (nameListTable.size() > 0 || nameHashSetTable.size() > 0)) {
-                            if (tokens.get(pointer + 1).getTypeLexeme().equals("POINT")) {
-                                flag = false;
-                                lvl = 0;
-                                if (nameListTable.size() > 0) {
-                                    for (NameList var : nameListTable) {
+                    } else if (pointer + 1 < tokens.size() && (nameListTable.size() > 0 || nameHashSetTable.size() > 0)) {
+                        if (tokens.get(pointer + 1).getTypeLexeme().equals("POINT")) {
+                            flag = false;
+                            lvl = 0;
+                            if (nameListTable.size() > 0) {
+                                for (NameList var : nameListTable) {
+                                    int i = 0;
+                                    do {
+                                        if (var.name.equals(tokens.get(pointer).getLexeme() + (level - i) + "L")) {
+                                            flag = true;
+                                            lvl = level - i;
+                                            break;
+                                        }
+                                        i++;
+                                    } while (level - i >= 0);
+                                }
+                            }
+                            if (flag) {
+                                if (stack.size() != 0 && tokens.get(pointer + 2).getTypeLexeme().equals("FUNCTION")) {
+                                    crowdingOut();
+                                }
+                                poliz.add(tokens.get(pointer).getLexeme() + lvl + "L");
+                            } else {
+                                if (nameHashSetTable.size() > 0) {
+                                    for (NameHashSet var : nameHashSetTable) {
                                         int i = 0;
                                         do {
-                                            if (var.name.equals(tokens.get(pointer).getLexeme() + (level - i) + "L")) {
+                                            if (var.name.equals(tokens.get(pointer).getLexeme() + (level - i) + "HS")) {
                                                 flag = true;
                                                 lvl = level - i;
-                                                break;
                                             }
                                             i++;
                                         } while (level - i >= 0);
@@ -338,96 +352,77 @@ public class Parser {
                                     if (stack.size() != 0 && tokens.get(pointer + 2).getTypeLexeme().equals("FUNCTION")) {
                                         crowdingOut();
                                     }
-                                    poliz.add(tokens.get(pointer).getLexeme() + lvl + "L");
-                                } else {
-                                    flag = false;
-                                    lvl = 0;
-                                    if (nameHashSetTable.size() > 0) {
-                                        for (NameHashSet var : nameHashSetTable) {
-                                            int i = 0;
-                                            do {
-                                                if (var.name.equals(tokens.get(pointer).getLexeme() + (level - i) + "HS")) {
-                                                    flag = true;
-                                                    lvl = level - i;
-                                                }
-                                                i++;
-                                            } while (level - i >= 0);
-                                        }
-                                    }
-                                    if (flag) {
-                                        if (stack.size() != 0 && tokens.get(pointer + 2).getTypeLexeme().equals("FUNCTION")) {
-                                            crowdingOut();
-                                        }
-                                        poliz.add(tokens.get(pointer).getLexeme() + lvl + "HS");
-                                    } else flagErr++;
-                                }
-                            } else {
-                                if (tokens.get(pointer - 2).getTypeLexeme().equals("CREATE_KW")) {
-                                    flag = false;
-                                    int i = 0;
-                                    do {
-                                        for (Variable var : varTable) {
-                                            if (var.name.equals(tokens.get(pointer).getLexeme() + (level - i))) {
-                                                flag = true;
-                                            }
-                                        }
-                                        for (NameList var : nameListTable) {
-                                            if (var.name.equals(tokens.get(pointer).getLexeme() + level + "L")) {
-                                                flag = true;
-                                            }
-                                        }
-                                        for (NameHashSet var : nameHashSetTable) {
-                                            if (var.name.equals(tokens.get(pointer).getLexeme() + level + "HS")) {
-                                                flag = true;
-                                            }
-                                        }
-                                        i++;
-                                    } while (level - i >= 0);
-                                    if (!flag) {
-                                        if (tokens.get(pointer - 4).getTypeLexeme().equals("LIST_KW")) {
-                                            nameListTable.add(new NameList(tokens.get(pointer).getLexeme() + level + "L"));
-                                            poliz.add(tokens.get(pointer).getLexeme() + level + "L");
-                                        } else {
-                                            nameHashSetTable.add(new NameHashSet(tokens.get(pointer).getLexeme() + level + "HS"));
-                                            poliz.add(tokens.get(pointer).getLexeme() + level + "HS");
-                                        }
-                                    } else flagErr++;
+                                    poliz.add(tokens.get(pointer).getLexeme() + lvl + "HS");
                                 } else flagErr++;
                             }
-                        } else {
-                            if (tokens.get(pointer - 2).getTypeLexeme().equals("CREATE_KW")) {
-                                flag = false;
-                                int i = 0;
-                                do {
-                                    for (Variable var : varTable) {
-                                        if (var.name.equals(tokens.get(pointer).getLexeme() + (level - i))) {
-                                            flag = true;
-                                        }
+                        } else if (tokens.get(pointer - 2).getTypeLexeme().equals("CREATE_KW")) {
+                            flag = false;
+                            int i = 0;
+                            do {
+                                for (Variable var : varTable) {
+                                    if (var.name.equals(tokens.get(pointer).getLexeme() + (level - i))) {
+                                        flag = true;
+                                        break;
                                     }
-                                    for (NameList var : nameListTable) {
-                                        if (var.name.equals(tokens.get(pointer).getLexeme() + level + "L")) {
-                                            flag = true;
-                                        }
+                                }
+                                for (NameList var : nameListTable) {
+                                    if (var.name.equals(tokens.get(pointer).getLexeme() + level + "L")) {
+                                        flag = true;
+                                        break;
                                     }
-                                    for (NameHashSet var : nameHashSetTable) {
-                                        if (var.name.equals(tokens.get(pointer).getLexeme() + level + "HS")) {
-                                            flag = true;
-                                        }
+                                }
+                                for (NameHashSet var : nameHashSetTable) {
+                                    if (var.name.equals(tokens.get(pointer).getLexeme() + level + "HS")) {
+                                        flag = true;
+                                        break;
                                     }
-                                    i++;
-                                } while (level - i >= 0);
-                                if (!flag) {
-                                    if (tokens.get(pointer - 4).getTypeLexeme().equals("LIST_KW")) {
-                                        nameListTable.add(new NameList(tokens.get(pointer).getLexeme() + level + "L"));
-                                        poliz.add(tokens.get(pointer).getLexeme() + level + "L");
-                                    } else {
-                                        nameHashSetTable.add(new NameHashSet(tokens.get(pointer).getLexeme() + level + "HS"));
-                                        poliz.add(tokens.get(pointer).getLexeme() + level + "HS");
-                                    }
-                                } else flagErr++;
+                                }
+                                i++;
+                            } while (level - i >= 0);
+                            if (!flag) {
+                                if (tokens.get(pointer - 4).getTypeLexeme().equals("LIST_KW")) {
+                                    nameListTable.add(new NameList(tokens.get(pointer).getLexeme() + level + "L"));
+                                    poliz.add(tokens.get(pointer).getLexeme() + level + "L");
+                                } else {
+                                    nameHashSetTable.add(new NameHashSet(tokens.get(pointer).getLexeme() + level + "HS"));
+                                    poliz.add(tokens.get(pointer).getLexeme() + level + "HS");
+                                }
                             } else flagErr++;
-                        }
-                    }
+                        } else flagErr++;
+                    } else if (tokens.get(pointer - 2).getTypeLexeme().equals("CREATE_KW")) {
+                        flag = false;
+                        int i = 0;
+                        do {
+                            for (Variable var : varTable) {
+                                if (var.name.equals(tokens.get(pointer).getLexeme() + (level - i))) {
+                                    flag = true;
+                                    break;
+                                }
+                            }
+                            for (NameList var : nameListTable) {
+                                if (var.name.equals(tokens.get(pointer).getLexeme() + level + "L")) {
+                                    flag = true;
+                                    break;
+                                }
+                            }
+                            for (NameHashSet var : nameHashSetTable) {
+                                if (var.name.equals(tokens.get(pointer).getLexeme() + level + "HS")) {
+                                    flag = true;
+                                    break;
+                                }
+                            }
+                            i++;
+                        } while (level - i >= 0);
+                        if (!flag) {
+                            if (tokens.get(pointer - 4).getTypeLexeme().equals("LIST_KW")) {
+                                nameListTable.add(new NameList(tokens.get(pointer).getLexeme() + level + "L"));
+                                poliz.add(tokens.get(pointer).getLexeme() + level + "L");
+                            } else {
+                                nameHashSetTable.add(new NameHashSet(tokens.get(pointer).getLexeme() + level + "HS"));
+                                poliz.add(tokens.get(pointer).getLexeme() + level + "HS");
+                            }
+                        } else flagErr++;
+                    } else flagErr++;
                 }
             } else flagErr++;
         } else flagErr++;
@@ -470,8 +465,8 @@ public class Parser {
                     if (!stack.getLast().getTypeLexeme().equals("DO")) {
                         level++;
                         scope++;
-                        transitTable.add(new Variable("p" + scope + 1, poliz.size()));
-                        transitTable.add(new Variable("p" + scope + 2, -1));
+                        transitTable.put("p" + scope + 1, poliz.size());
+                        transitTable.put("p" + scope + 2, -1);
                         stack.addLast(new Token("WHILE1", "p" + scope + 2));
                         stack.addLast(new Token("WHILE0", "!"));
                         stack.addLast(new Token("WHILE0", "p" + scope + 1));
@@ -481,8 +476,8 @@ public class Parser {
                 } else {
                     level++;
                     scope++;
-                    transitTable.add(new Variable("p" + scope + 1, poliz.size()));
-                    transitTable.add(new Variable("p" + scope + 2, -1));
+                    transitTable.put("p" + scope + 1, poliz.size());
+                    transitTable.put("p" + scope + 2, -1);
                     stack.addLast(new Token("WHILE1", "p" + scope + 2));
                     stack.addLast(new Token("WHILE0", "!"));
                     stack.addLast(new Token("WHILE0", "p" + scope + 1));
@@ -502,14 +497,13 @@ public class Parser {
                     crowdingOut();
                 }
                 scope++;
-                transitTable.add(new Variable("p" + scope + 1, poliz.size()));
-                transitTable.add(new Variable("p" + scope + 2, -1));
+                transitTable.put("p" + scope + 1, poliz.size());
+                transitTable.put("p" + scope + 2, -1);
                 stack.addLast(new Token("DO1", "p" + scope + 2));
                 stack.addLast(new Token("DO", "!"));
                 stack.addLast(new Token("DO", "p" + scope + 1));
                 stack.addLast(new Token("DO", "!F"));
                 stack.addLast(new Token("DO", "p" + scope + 2));
-
             } else flagErr++;
         } else flagErr++;
         pointer++;
@@ -520,7 +514,7 @@ public class Parser {
             if (tokens.get(pointer).getTypeLexeme().equals("IF_KW")) {
                 level++;
                 scope++;
-                transitTable.add(new Variable("p" + scope + 1, -1));
+                transitTable.put("p" + scope + 1, -1);
                 if (stack.size() != 0) {
                     crowdingOut();
                 }
@@ -537,7 +531,7 @@ public class Parser {
             if (tokens.get(pointer).getTypeLexeme().equals("ELSE_KW")) {
                 level++;
                 scope++;
-                transitTable.add(new Variable("p" + scope + 2, -1));
+                transitTable.put("p" + scope + 2, -1);
                 if (stack.size() != 0) {
                     crowdingOut();
                 }
@@ -554,10 +548,10 @@ public class Parser {
             if (tokens.get(pointer).getTypeLexeme().equals("FOR_KW")) {
                 level++;
                 scope++;
-                transitTable.add(new Variable("p" + scope + 1, -1));
-                transitTable.add(new Variable("p" + scope + 2, -1));
-                transitTable.add(new Variable("p" + scope + 3, -1));
-                transitTable.add(new Variable("p" + scope + 4, -1));
+                transitTable.put("p" + scope + 1, -1);
+                transitTable.put("p" + scope + 2, -1);
+                transitTable.put("p" + scope + 3, -1);
+                transitTable.put("p" + scope + 4, -1);
                 if (stack.size() != 0) {
                     crowdingOut();
                 }
@@ -705,14 +699,7 @@ public class Parser {
                                 }
                             }
                             if (stack.size() != 0) {
-                                int i = 0;
-                                while (true) {
-                                    if (transitTable.get(transitTable.size() - 1 - i).name.equals(stack.getLast().getLexeme())) {
-                                        break;
-                                    }
-                                    i++;
-                                }
-                                transitTable.set(transitTable.size() - 1 - i, new Variable(stack.getLast().getLexeme(), poliz.size()));
+                                transitTable.replace(stack.getLast().getLexeme(), poliz.size());
                                 stack.removeLast();
                                 poliz.addLast("" + level);
                                 poliz.addLast("|");     //это флаг для стек машины, чтобы она знала, что область видимости закончилась
@@ -749,10 +736,8 @@ public class Parser {
                                 }
                                 level--;
                             }
-                        } else {
-                            if (stack.getLast().getTypeLexeme().equals("FUNCTION")) {
-                                poliz.add(stack.removeLast().getLexeme());
-                            }
+                        } else if (stack.getLast().getTypeLexeme().equals("FUNCTION")) {
+                            poliz.add(stack.removeLast().getLexeme());
                         }
                     }
                 }
@@ -764,46 +749,37 @@ public class Parser {
     private void L_B() {    //открывающая фигурная скобка
         if (pointer < tokens.size() && flagErr == 0) {
             if (tokens.get(pointer).getTypeLexeme().equals("L_B")) {
-                if (stack.getLast().getTypeLexeme().equals("FOR")) {
-                    while (!stack.getLast().getTypeLexeme().equals("FOR1")) {
-                        if (stack.getLast().getTypeLexeme().equals("FOR0")) {
-                            int i = 0;
-                            int j = 0;
-                            while (true) {
-                                if (transitTable.size() - 1 - i >= 0) {
-                                    if (transitTable.get(transitTable.size() - 1 - i).name.equals("p" + (scope - j) + 2) && transitTable.get(transitTable.size() - 1 - i).value == -1) {
+                switch (stack.getLast().getTypeLexeme()) {
+                    case "FOR":
+                        while (!stack.getLast().getTypeLexeme().equals("FOR1")) {
+                            if (stack.getLast().getTypeLexeme().equals("FOR0")) {
+                                int j = 0;
+                                while (true) {
+                                    if (transitTable.containsKey("p" + (scope - j) + 2) && transitTable.get("p" + (scope - j) + 2) == -1) {
                                         break;
+                                    } else {
+                                        j++;
                                     }
-                                    i++;
-                                } else {
-                                    j++;
-                                    i = 0;
                                 }
+                                transitTable.replace("p" + (scope - j) + 2, poliz.size());
                             }
-                            transitTable.set(transitTable.size() - 1 - i, new Variable("p" + (scope - j) + 2, poliz.size()));
-                        }
-                        poliz.add(stack.removeLast().getLexeme());
-                        if (stack.size() == 0) {
-                            flagErr++;
-                            break;
-                        }
-                    }
-                    int i = 0;
-                    int j = 0;
-                    while (true) {
-                        if (transitTable.size() - 1 - i >= 0) {
-                            if (transitTable.get(transitTable.size() - 1 - i).name.equals("p" + (scope - j) + 3) && transitTable.get(transitTable.size() - 1 - i).value == -1) {
+                            poliz.add(stack.removeLast().getLexeme());
+                            if (stack.size() == 0) {
+                                flagErr++;
                                 break;
                             }
-                            i++;
-                        } else {
-                            j++;
-                            i = 0;
                         }
-                    }
-                    transitTable.set(transitTable.size() - 1 - i, new Variable("p" + (scope - j) + 3, poliz.size()));
-                } else {
-                    if (stack.getLast().getTypeLexeme().equals("IF")) {
+                        int j = 0;
+                        while (true) {
+                            if (transitTable.containsKey("p" + (scope - j) + 3) && transitTable.get("p" + (scope - j) + 3) == -1) {
+                                break;
+                            } else {
+                                j++;
+                            }
+                        }
+                        transitTable.replace("p" + (scope - j) + 3, poliz.size());
+                        break;
+                    case "IF":
                         while (stack.getLast().getTypeLexeme().equals("IF")) {
                             poliz.add(stack.removeLast().getLexeme());
                             if (stack.size() == 0) {
@@ -811,27 +787,25 @@ public class Parser {
                                 break;
                             }
                         }
-                    } else {
-                        if (stack.getLast().getTypeLexeme().equals("ELSE")) {
-                            while (stack.getLast().getTypeLexeme().equals("ELSE")) {
-                                poliz.add(stack.removeLast().getLexeme());
-                                if (stack.size() == 0) {
-                                    flagErr++;
-                                    break;
-                                }
-                            }
-                        } else {
-                            if (stack.getLast().getTypeLexeme().equals("WHILE")) {
-                                while (stack.getLast().getTypeLexeme().equals("WHILE")) {
-                                    poliz.add(stack.removeLast().getLexeme());
-                                    if (stack.size() == 0) {
-                                        flagErr++;
-                                        break;
-                                    }
-                                }
+                        break;
+                    case "ELSE":
+                        while (stack.getLast().getTypeLexeme().equals("ELSE")) {
+                            poliz.add(stack.removeLast().getLexeme());
+                            if (stack.size() == 0) {
+                                flagErr++;
+                                break;
                             }
                         }
-                    }
+                        break;
+                    case "WHILE":
+                        while (stack.getLast().getTypeLexeme().equals("WHILE")) {
+                            poliz.add(stack.removeLast().getLexeme());
+                            if (stack.size() == 0) {
+                                flagErr++;
+                                break;
+                            }
+                        }
+                        break;
                 }
                 stack.addLast(tokens.get(pointer));
             } else flagErr++;
@@ -853,71 +827,39 @@ public class Parser {
                     stack.removeLast();
 
                     if (stack.size() != 0) {
-                        if (stack.getLast().getTypeLexeme().equals("FOR1")) {
-                            while (stack.getLast().getTypeLexeme().equals("FOR1")) {
-                                poliz.add(stack.removeLast().getLexeme());
-                                if (stack.size() == 0) {
-                                    flagErr++;
-                                    break;
-                                }
-                            }
-                            int i = 0;
-                            int j = 0;
-                            while (true) {
-                                if (transitTable.size() - 1 - i >= 0) {
-                                    if (transitTable.get(transitTable.size() - 1 - i).name.equals("p" + (scope - j) + 4) && transitTable.get(transitTable.size() - 1 - i).value == -1) {
+                        switch (stack.getLast().getTypeLexeme()) {
+                            case "FOR1":
+                                while (stack.getLast().getTypeLexeme().equals("FOR1")) {
+                                    poliz.add(stack.removeLast().getLexeme());
+                                    if (stack.size() == 0) {
+                                        flagErr++;
                                         break;
                                     }
-                                    i++;
-                                } else {
-                                    j++;
-                                    i = 0;
                                 }
-                            }
-                            transitTable.set(transitTable.size() - 1 - i, new Variable("p" + (scope - j) + 4, poliz.size()));
-                        } else {
-                            if (stack.getLast().getTypeLexeme().equals("IF1")) {
-                                int i = 0;
+                                int j = 0;
                                 while (true) {
-                                    if (transitTable.get(transitTable.size() - 1 - i).name.equals(stack.getLast().getLexeme())) {
+                                    if (transitTable.containsKey("p" + (scope - j) + 4) && transitTable.get("p" + (scope - j) + 4) == -1) {
+                                        break;
+                                    } else {
+                                        j++;
+                                    }
+                                }
+                                transitTable.replace("p" + (scope - j) + 4, poliz.size());
+                                break;
+                            case "IF1":
+                            case "ELSE1":
+                                transitTable.replace(stack.removeLast().getLexeme(), poliz.size());
+                                break;
+                            case "WHILE0":
+                                while (stack.getLast().getTypeLexeme().equals("WHILE0")) {
+                                    poliz.add(stack.removeLast().getLexeme());
+                                    if (stack.size() == 0) {
+                                        flagErr++;
                                         break;
                                     }
-                                    i++;
                                 }
-                                transitTable.set(transitTable.size() - 1 - i, new Variable(stack.getLast().getLexeme(), poliz.size()));
-                                stack.removeLast();
-                            } else {
-                                if (stack.getLast().getTypeLexeme().equals("ELSE1")) {
-                                    int i = 0;
-                                    while (true) {
-                                        if (transitTable.get(transitTable.size() - 1 - i).name.equals(stack.getLast().getLexeme())) {
-                                            break;
-                                        }
-                                        i++;
-                                    }
-                                    transitTable.set(transitTable.size() - 1 - i, new Variable(stack.getLast().getLexeme(), poliz.size()));
-                                    stack.removeLast();
-                                } else {
-                                    if (stack.getLast().getTypeLexeme().equals("WHILE0")) {
-                                        while (stack.getLast().getTypeLexeme().equals("WHILE0")) {
-                                            poliz.add(stack.removeLast().getLexeme());
-                                            if (stack.size() == 0) {
-                                                flagErr++;
-                                                break;
-                                            }
-                                        }
-                                        int i = 0;
-                                        while (true) {
-                                            if (transitTable.get(transitTable.size() - 1 - i).name.equals(stack.getLast().getLexeme())) {
-                                                break;
-                                            }
-                                            i++;
-                                        }
-                                        transitTable.set(transitTable.size() - 1 - i, new Variable(stack.getLast().getLexeme(), poliz.size()));
-                                        stack.removeLast();
-                                    }
-                                }
-                            }
+                                transitTable.replace(stack.removeLast().getLexeme(), poliz.size());
+                                break;
                         }
                     }
                     if (stack.size() == 0) {
@@ -1001,20 +943,15 @@ public class Parser {
         if (pointer < tokens.size() && flagErr == 0) {
             if (tokens.get(pointer).getTypeLexeme().equals("COLON")) {
                 poliz.add(stack.removeLast().getLexeme());
-                int i = 0;
                 int j = 0;
                 while (true) {
-                    if (transitTable.size() - 1 - i >= 0) {
-                        if (transitTable.get(transitTable.size() - 1 - i).name.equals("p" + (scope - j) + 1) && transitTable.get(transitTable.size() - 1 - i).value == -1) {
-                            break;
-                        }
-                        i++;
+                    if (transitTable.containsKey("p" + (scope - j) + 1) && transitTable.get("p" + (scope - j) + 1) == -1) {
+                        break;
                     } else {
                         j++;
-                        i = 0;
                     }
                 }
-                transitTable.set(transitTable.size() - 1 - i, new Variable("p" + (scope - j) + 1, poliz.size()));
+                transitTable.replace("p" + (scope - j) + 1, poliz.size());
                 poliz.add(tokens.get(pointer - 3).getLexeme() + level);
                 stack.addLast(new Token("COMP_OP", "<"));
             } else flagErr++;
@@ -1067,8 +1004,8 @@ public class Parser {
 
     private void POINT() {
         if (pointer < tokens.size() && flagErr == 0) {
-            if (tokens.get(pointer).getTypeLexeme().equals("POINT")) {
-            } else flagErr++;
+            if (!tokens.get(pointer).getTypeLexeme().equals("POINT"))
+                flagErr++;
         } else flagErr++;
         pointer++;
     }

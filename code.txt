@@ -1,25 +1,4 @@
 ﻿int a = 0
-List.create(list)
-do {
-    a = a + 1
-    list.add(a)
-} while(a < 2)
-if (a == 2) {
-    int b = 4
-    list.add(b)
-    int e = list.size
-    int c = a + list.get(e - 1)
-    list.remove(b)
-    HashSet.create(hs)
-    for(int i = 0 : a) {
-        b = b + 1
-        hs.add(b)
-    }
-    hs.remove(b)
-    while(b == c) {
-        c = c + 1
-        hs.add(c)
-    }
-    print
-}
+int b = 7
+b = a + b
 print

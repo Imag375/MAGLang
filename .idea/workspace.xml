@@ -2,22 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8047a61-a9ee-4e24-bc34-52bbf85ef137" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ru/mirea/NameHashSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ru/mirea/NameList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ru/mirea/Optimizer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ru/mirea/Triad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/LexemPatterns.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/LexemPatterns.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/Parser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/StackMachine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MAGLang/ru/mirea/StackMachine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/mirea/Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/mirea/Lexer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/mirea/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/mirea/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/mirea/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/mirea/Parser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ru/mirea/StackMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/mirea/StackMachine.java" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,73 +20,6 @@
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ru/mirea/Parser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="60" column="23" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-523">
-              <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/mirea/Lexer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="29" column="52" selection-start-line="29" selection-start-column="52" selection-end-line="29" selection-end-column="52" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/mirea/StackMachine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="49" selection-start-line="49" selection-end-line="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ru/mirea/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -103,79 +31,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/ru/mirea/Token.java" />
-        <option value="$PROJECT_DIR$/src/ru/mirea/Variable.java" />
-        <option value="$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java" />
-        <option value="$PROJECT_DIR$/src/ru/mirea/NameList.java" />
-        <option value="$PROJECT_DIR$/src/ru/mirea/NameHashSet.java" />
-        <option value="$PROJECT_DIR$/src/ru/mirea/StackMachine.java" />
-        <option value="$PROJECT_DIR$/src/ru/mirea/Lexer.java" />
-        <option value="$PROJECT_DIR$/src/ru/mirea/Parser.java" />
-        <option value="$PROJECT_DIR$/src/ru/mirea/Main.java" />
-        <option value="$PROJECT_DIR$/code.txt" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="744" />
-  </component>
+  <component name="ProjectId" id="1RHsFQTcQpq2PPRK8GTIZzLJXsT" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="MAGLang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MAGLang" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MAGLang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MAGLang" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MAGLang" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MAGLang" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="mirea" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Информационная безопасность/SRP" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -196,6 +67,18 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -219,38 +102,110 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17700455" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3453355" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.40425533" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3289689" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-    </layout>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="275" y="25" key="#Inspections" timestamp="1576421365204">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state x="275" y="25" key="#Inspections/0.0.1366.736@0.0.1366.736" timestamp="1576421365204" />
+    <state x="488" y="67" key="#com.intellij.ide.util.MemberChooser" timestamp="1576411093594">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state x="488" y="67" key="#com.intellij.ide.util.MemberChooser/0.0.1366.736@0.0.1366.736" timestamp="1576411093594" />
+    <state x="363" y="94" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1576599174670">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state x="363" y="94" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.736@0.0.1366.736" timestamp="1576599174670" />
+    <state x="463" y="121" key="FileChooserDialogImpl" timestamp="1576897393219">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state x="463" y="121" key="FileChooserDialogImpl/0.0.1366.736@0.0.1366.736" timestamp="1576897393219" />
+    <state width="1322" height="223" key="GridCell.Tab.0.bottom" timestamp="1576935312653">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state width="1322" height="223" key="GridCell.Tab.0.bottom/0.0.1366.736@0.0.1366.736" timestamp="1576935312653" />
+    <state width="1322" height="223" key="GridCell.Tab.0.center" timestamp="1576935312652">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state width="1322" height="223" key="GridCell.Tab.0.center/0.0.1366.736@0.0.1366.736" timestamp="1576935312652" />
+    <state width="1322" height="223" key="GridCell.Tab.0.left" timestamp="1576935312652">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state width="1322" height="223" key="GridCell.Tab.0.left/0.0.1366.736@0.0.1366.736" timestamp="1576935312652" />
+    <state width="1322" height="223" key="GridCell.Tab.0.right" timestamp="1576935312652">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state width="1322" height="223" key="GridCell.Tab.0.right/0.0.1366.736@0.0.1366.736" timestamp="1576935312652" />
+    <state width="1322" height="223" key="GridCell.Tab.1.bottom" timestamp="1576935312653">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state width="1322" height="223" key="GridCell.Tab.1.bottom/0.0.1366.736@0.0.1366.736" timestamp="1576935312653" />
+    <state width="1322" height="223" key="GridCell.Tab.1.center" timestamp="1576935312653">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state width="1322" height="223" key="GridCell.Tab.1.center/0.0.1366.736@0.0.1366.736" timestamp="1576935312653" />
+    <state width="1322" height="223" key="GridCell.Tab.1.left" timestamp="1576935312653">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state width="1322" height="223" key="GridCell.Tab.1.left/0.0.1366.736@0.0.1366.736" timestamp="1576935312653" />
+    <state width="1322" height="223" key="GridCell.Tab.1.right" timestamp="1576935312653">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state width="1322" height="223" key="GridCell.Tab.1.right/0.0.1366.736@0.0.1366.736" timestamp="1576935312653" />
+    <state x="186" y="0" key="SettingsEditor" timestamp="1576752947726">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state x="186" y="0" key="SettingsEditor/0.0.1366.736@0.0.1366.736" timestamp="1576752947726" />
+    <state x="481" y="26" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1576408750932">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state x="481" y="26" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.736@0.0.1366.736" timestamp="1576408750932" />
+    <state x="339" y="159" key="run.anything.popup" timestamp="1575202401608">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state x="339" y="159" key="run.anything.popup/0.0.1366.736@0.0.1366.736" timestamp="1575202401608" />
+    <state x="346" y="57" width="672" height="678" key="search.everywhere.popup" timestamp="1576919917418">
+      <screen x="0" y="0" width="1366" height="736" />
+    </state>
+    <state x="346" y="57" width="672" height="678" key="search.everywhere.popup/0.0.1366.736@0.0.1366.736" timestamp="1576919917418" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Optimizer.java</url>
+          <line>284</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Optimizer.java</url>
+          <line>79</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Optimizer.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ru/mirea/Optimizer.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="nameHashSetTable" language="JAVA" />
@@ -258,171 +213,5 @@
         <watch expression="varTable" language="JAVA" />
       </configuration>
     </watches-manager>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/NameList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/NameHashSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Variable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Token.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/LexemPatterns.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-523">
-          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Lexer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="29" column="52" selection-start-line="29" selection-start-column="52" selection-end-line="29" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/StackMachine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ru/mirea/Parser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="60" column="23" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>10</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>MAGLang</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>9</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
